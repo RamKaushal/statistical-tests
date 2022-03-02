@@ -29,3 +29,23 @@ for i in range(60):
 
 sns.distplot(samples_list)
 plt.show()
+
+samples_list1 = []
+for i in range(60):
+    final_survied_female_age_samples = np.random.choice(final_survied_female_age,60).mean()
+    samples_list1.append(final_survied_female_age_samples)
+ztest_score,pvalue = ztest(x1 = samples_list,x2 =samples_list1, value=0,alternative = 'two-sided')
+print(pvalue)
+#print(ztest_score)
+
+if pvalue<0.5:
+    print("reject the null hypothesis with"+str((1-pvalue)*100)+"level of confidence")
+else:
+    print("failed to reject the h0")
+
+lower,upper = zconfint(x1=samples_list,value=0,alpha=0.05,alternative='two-sided')
+
+print(str(lower)+','+str(upper)+'for male')
+lower1,upper1 = zconfint(x1=samples_list1,value=0,alpha=0.05,alternative='two-sided')
+
+print(str(lower1)+','+str(upper1)+'for female')
